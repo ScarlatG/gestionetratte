@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import it.prova.gestionetratte.model.Stato;
 import it.prova.gestionetratte.model.Tratta;
 
 public interface TrattaRepository extends CrudRepository<Tratta, Long>, CustomTrattaRepository {
@@ -16,4 +17,8 @@ public interface TrattaRepository extends CrudRepository<Tratta, Long>, CustomTr
 
 	@Query("select t from Tratta t join fetch t.airbus")
 	List<Tratta> findAllTrattaEager();
+
+	@Query("SELECT t FROM Tratta t WHERE t.stato = 'ATTIVA'")
+	List<Tratta> findByStato(Stato stato);
+
 }
